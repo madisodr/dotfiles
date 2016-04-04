@@ -1,0 +1,18 @@
+pcm.btheadset {
+    type bluetooth
+    device 00:18:6B:5F:5D:7C
+    profile "auto"
+}
+
+ctl.btheadset
+{
+    type bluetooth
+}
+
+pcm.btheadset_softvol
+{
+    type softwol
+    slave.pcm "btheadset"
+    control.name "Bluetooth"
+    control.card 0
+}
