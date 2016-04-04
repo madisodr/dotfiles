@@ -1,0 +1,105 @@
+#define FG #353945
+#define BG #f5f5f5
+
+#define BK #5c616c
+#define DK_GY DK_GY
+
+#define DK_RD #e1485a
+#define RD DK_RD
+
+#define DK_GN #35ac54
+#define GN DK_GN
+
+#define DK_YW #ef654a
+#define YW DK_YW
+
+#define DK_BL #5294e2
+#define BL DK_BL
+
+#define DK_MA #c81a71
+#define MA DK_MA
+
+#define DK_CN #1ba39c
+#define CN DK_cN
+
+#define LT_GY #353945
+#define WT LT_GY
+
+! COLORS
+! ------------------------------------------------------------------------------
+*background:  BG
+*foreground:  FG
+*cursorColor: LT_GY
+
+*color0: BK
+*color1: DK_RD 
+*color2: DK_GN
+*color3: DK_YW
+*color4: DK_BL
+*color5: DK_MA
+*color6: DK_CN
+*color7: LT_GY
+*color8: DK_GY
+*color9: RD
+*color10: GN
+*color11: YW
+*color12: BL
+*color13: MA
+*color14: CN
+*color15: WT
+
+*font:     xft:bitocra:pixelsize=10
+*boldFont:  xft:bitocra:pixelsize=10
+! XFT
+! ------------------------------------------------------------------------------
+Xft.autohint: 0
+Xft.lcdfilter:  lcddefault
+Xft.hintstyle:  hintfull
+Xft.hinting: 1
+Xft.antialias: 1
+Xft.rgba: rgb
+
+! UXRVT
+! ------------------------------------------------------------------------------
+
+URxvt.letterSpace: 1
+URxvt.scrollBar: off
+URxvt.saveLines: 30000
+URxvt.secondaryScroll: true
+URxvt.scrollTtyOutput: true
+URxvt.url-launcher: /usr/bin/google-chrome
+URxvt.underlineURLS: true
+URxvt.matcher.button: 1
+URxvt.geometry: 90x30
+URxvt.iso14755: false
+URxvt.perl-ext-common: default,matcher,clipboard
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.keysym.Shift-Control-C: perl:clipboard:copy
+
+! transparency
+urxvt.depth: 32
+urxvt.blurRadius: 5
+urxvt.opacity: 80
+
+URxvt.buffered: false
+URxvt.cursorBlink: false
+
+! ROFI
+! ------------------------------------------------------------------------------
+rofi.opacity: 80
+rofi.padding: 120
+rofi.fake_transparency: true
+rofi.fullscreen: false
+rofi.lines: 3
+rofi.eh: 3
+rofi.color-enabled: true
+rofi.color-window: BG, BG, BG
+rofi.color-normal: BG, FG, BG, FG, RD
+rofi.color-active: BG, BL, BG, FG, BL
+rofi.color-urgent: BG, RD, BG, FG, MA
+
+rofi.location: 0
+! rofi.terminal: urxvt
+
+rofi.bw: 0
+rofi.separator-style: none
