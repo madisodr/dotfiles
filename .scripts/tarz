@@ -1,0 +1,30 @@
+#!/usr/bin/perl
+use Switch;
+## (1) quit unless we have the correct number of args
+$num_args = $#ARGV + 1;
+$op = $ARGV[0];
+
+if($num_args < 2 || length $op > 1) { &usage; }
+
+$file = $filefull = $ARGV[1];
+$file =~ s{\.[^.]+$}{}; # removes the file extention. I think...
+
+switch($op) {
+    case 'c'{ print"taring\n"; system("tar -cvf $file.tar $file");}
+    case 'z'{ print"gzipping + taring\n"; system("tar -czvf $file.tar $file");}
+    case 'x'{ print"extracting\n"; system("tar -xvf $filefull");}
+    case 'l'{ print"listing archive..\n"; system("tar -tvf $filefull");}
+    
+    else { &usage; }
+}
+
+sub usage {
+    print "\nUsage: tarz.pl -arg filename\n";
+    print "Allowable Arguements: e/t/l/x/c\n";
+    print "x - extract archive\n";
+    print "c - create uncompressed archive\n";
+    print "z - create compressed archive\n";
+    print "l - list an archives contents\n";
+
+    exit
+}
