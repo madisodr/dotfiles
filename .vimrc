@@ -30,6 +30,7 @@
         Bundle 'chriskempson/base16-vim'
         Bundle 'sukima/xmledit'
         Bundle 'vim-scripts/simple-pairs'
+        Bundle 'autoclose/autoclose'
 """ }}}
 """ User interface {{{
     """ Syntax highlighting {{{
@@ -131,8 +132,10 @@
     set smarttab                                    " tab to 0,4,8 etc.
     set softtabstop=4                               " "tab" feels like <tab>
     set tabstop=4                                   " replace <TAB> w/4 spaces
-    inoremap { { }<Esc>i
-    inoremap [ []<Esc>i
+    """inoremap { {}<Esc>i
+    """inoremap [ []<Esc>i
+    """inoremap ( ()<Esc>i
+    
 """ }}}
 """ Keybindings {{{
     " Remap <leader>
