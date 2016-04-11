@@ -34,6 +34,7 @@ alias synaptic='gksudo synaptic && exit'
 
 # Change BG
 alias fbg='feh --bg-scale'
+alias wall='fbg ~/wallpaper.png'
 
 # GIT
 alias commit='git commit -am'
