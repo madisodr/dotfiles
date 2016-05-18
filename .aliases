@@ -1,3 +1,5 @@
+#disk info
+alias df='df -h'
 #screen alias
 alias home='~/.screenlayout/Home.sh'
 alias lab='~/.screenlayout/Lab.sh'
@@ -43,7 +45,7 @@ alias pull='git pull origin'
 alias clone='git clone'
 
 # BLUETOOTH & AUDIO
-alias bt='bt-audio -c 00:18:6B:5F:5D:7C'
+alias bt='~/.scripts/bluetooth.sh'
 alias pavu='pavucontrol'
 
 # APT-GET
@@ -62,3 +64,7 @@ alias tar='~/.scripts/tarz'
 alias olympus='ssh lanterns@107.180.25.1'
 alias kusanagi='ssh kusanagi@kusanagi'
 alias pi='ssh pi@danielrmadison.com'
+
+# restart pulse audio
+#alias pulsek='pulseaudio -k'
+alias pulsek='killall -9 pulseaudio'
