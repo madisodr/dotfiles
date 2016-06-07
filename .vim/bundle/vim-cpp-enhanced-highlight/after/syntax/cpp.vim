@@ -34,22 +34,56 @@
 
 " Functions
 syn match   cCustomParen    "(" contains=cParen contains=cCppParen
-syn match   cCustomFunc     "\w\+\s*(\@=" contains=cCustomParen
+syn match   cCustomFunc     "\w\+\s*(\@="
 hi def link cCustomFunc  Function
-
-" Template functions
-if exists('g:cpp_experimental_template_highlight') && g:cpp_experimental_template_highlight
-    syn region  cCustomAngleBrackets matchgroup=AngleBracketContents start="\v%(<operator\_s*)@<!%(%(\_i|template\_s*)@<=\<[<=]@!|\<@<!\<[[:space:]<=]@!)" end='>' contains=@cppSTLgroup,cppStructure,cType,cCustomClass,cCustomAngleBrackets,cNumbers
-    syn match   cCustomBrack    "<\|>" contains=cCustomAngleBrackets
-    syn match   cCustomTemplateFunc "\w\+\s*<.*>(\@=" contains=cCustomBrack,cCustomAngleBrackets
-    hi def link cCustomTemplateFunc  Function
-endif
 
 " Class and namespace scope
 if exists('g:cpp_class_scope_highlight') && g:cpp_class_scope_highlight
     syn match    cCustomScope    "::"
-    syn match    cCustomClass    "\w\+\s*::" contains=cCustomScope
-    hi def link cCustomClass Function  " disabled for now
+    syn match    cCustomClass    "\w\+\s*::" 
+                \contains=cCustomScope 
+    " hi def link cCustomClass Function  " disabled for now
+    syn match   cCustomClass    "\<\u\w*\s*\>" 
+endif
+
+" Template functions
+if exists('g:cpp_experimental_template_highlight') && g:cpp_experimental_template_highlight
+
+    syn match   cCustomAngleBracketStart "<\_[^;()]\{-}>" contained 
+                \contains=cCustomAngleBracketStart, cCustomAngleBracketEnd
+    hi def link cCustomAngleBracketStart  cCustomAngleBracketContent
+
+    syn match   cCustomAngleBracketEnd ">\_[^<>;()]\{-}>" contained 
+                \contains=cCustomAngleBracketEnd
+    hi def link cCustomAngleBracketEnd  cCustomAngleBracketContent
+
+    syn match cCustomTemplateFunc "\<\l\w*\s*<\_[^;()]\{-}>(\@="hs=s,he=e-1 
+                \contains=cCustomAngleBracketStart
+    hi def link cCustomTemplateFunc  cCustomFunc
+
+    syn match    cCustomTemplateClass    "\<\w\+\s*<\_[^;()]\{-}>" 
+                \contains=cCustomAngleBracketStart,cCustomTemplateFunc 
+    hi def link cCustomTemplateClass cCustomClass
+
+
+    " Remove 'template' from cppStructure and use a custom match
+    syn clear cppStructure 
+    syn keyword cppStructure class typename namespace
+
+    syn match   cCustomTemplate "\<template\>" 
+    hi def link cCustomTemplate  cppStructure
+    syn match   cTemplateDeclare "\<template\_s*<\_[^;()]\{-}>" 
+                \contains=cppStructure,cCustomTemplate,cCustomAngleBracketStart 
+
+    " Remove 'operator' from cppStructure and use a custom match
+    syn clear cppOperator 
+    syn keyword cppOperator typeid
+    syn keyword cppOperator and bitor or xor compl bitand and_eq or_eq xor_eq not not_eq
+
+    syn match   cCustomOperator "\<operator\>" 
+    hi def link cCustomOperator  cppStructure
+    syn match   cTemplateOperatorDeclare "\<operator\_s*<\_[^;()]\{-}>[<>]=\?" 
+                \contains=cppOperator,cCustomOperator,cCustomAngleBracketStart 
 endif
 
 " Alternative syntax that is used in:
@@ -170,7 +204,7 @@ syntax keyword cppSTLfunction back
 syntax keyword cppSTLfunction back_inserter
 syntax keyword cppSTLfunction bad
 syntax keyword cppSTLfunction beg
-syntax keyword cppSTLfunction begin
+"syntax keyword cppSTLfunction begin
 syntax keyword cppSTLfunction binary_compose
 syntax keyword cppSTLfunction binary_negate
 syntax keyword cppSTLfunction binary_search
@@ -197,14 +231,14 @@ syntax keyword cppSTLfunction count
 syntax keyword cppSTLfunction count_if
 syntax keyword cppSTLfunction c_str
 syntax keyword cppSTLfunction ctime
-syntax keyword cppSTLfunction data
+"syntax keyword cppSTLfunction data
 syntax keyword cppSTLfunction denorm_min
 syntax keyword cppSTLfunction destroy
 syntax keyword cppSTLfunction difftime
 syntax keyword cppSTLfunction distance
 syntax keyword cppSTLfunction div
 syntax keyword cppSTLfunction empty
-syntax keyword cppSTLfunction end
+"syntax keyword cppSTLfunction end
 syntax keyword cppSTLfunction eof
 syntax keyword cppSTLfunction epsilon
 syntax keyword cppSTLfunction equal
@@ -417,7 +451,7 @@ syntax keyword cppSTLfunction signal
 syntax keyword cppSTLfunction signaling_NaN
 syntax keyword cppSTLfunction sin
 syntax keyword cppSTLfunction sinh
-syntax keyword cppSTLfunction size
+"syntax keyword cppSTLfunction size
 syntax keyword cppSTLfunction sort
 syntax keyword cppSTLfunction sort_heap
 syntax keyword cppSTLfunction splice
@@ -459,13 +493,13 @@ syntax keyword cppSTLfunction swap_ranges
 syntax keyword cppSTLfunction swprintf
 syntax keyword cppSTLfunction swscanf
 syntax keyword cppSTLfunction sync_with_stdio
-syntax keyword cppSTLfunction system
+"syntax keyword cppSTLfunction system
 syntax keyword cppSTLfunction tan
 syntax keyword cppSTLfunction tanh
 syntax keyword cppSTLfunction tellg
 syntax keyword cppSTLfunction tellp
-syntax keyword cppSTLfunction test
-syntax keyword cppSTLfunction time
+"syntax keyword cppSTLfunction test
+"syntax keyword cppSTLfunction time
 syntax keyword cppSTLfunction tmpfile
 syntax keyword cppSTLfunction tmpnam
 syntax keyword cppSTLfunction tolower
@@ -760,6 +794,7 @@ syntax keyword cppSTLconstant WCHAR_MAX
 if !exists("cpp_no_cpp11")
     syntax keyword cppSTLtype nullptr_t max_align_t
     syntax keyword cppSTLtype type_index
+    syntax keyword cppSTLconstant nullptr
 
     " type_traits
     syntax keyword cppSTLtype is_void
@@ -1052,7 +1087,7 @@ if !exists("cpp_no_cpp11")
     syntax keyword cppSTLconstant FLT_EVAL_METHOD
 
     " complex
-    syntax keyword cppSTLfunction proj
+    "syntax keyword cppSTLfunction proj
 
     " random
     syntax keyword cppSTLtype linear_congruential_engine
@@ -1309,24 +1344,6 @@ if !exists("cpp_no_cpp11")
     syntax keyword cppSTLtype seconds
     syntax keyword cppSTLtype minutes
     syntax keyword cppSTLtype hours
-
-    "Trinitycore Types
-    syntax keyword cppSTLtype uint64
-    syntax keyword cppSTLtype uint32
-    syntax keyword cppSTLtype uint16
-    syntax keyword cppSTLtype uint8
-    syntax keyword cppSTLtype QueryResult
-    syntax keyword cppSTLtype Field
-    
-    syntax keyword cppSTLtype WorldLocation
-    syntax keyword cppSTLtype Unit
-    syntax keyword cppSTLtype Player
-    syntax keyword cppSTLtype PlayerScript
-    syntax keyword cppSTLtype GameObject
-    syntax keyword cppSTLtype Spell
-    syntax keyword cppSTLtype SpellScript
-    syntax keyword cppSTLtype Item
-    syntax keyword cppSTLtype ItemScript
 
     "raw string literals
     syntax region cppRawString matchgroup=cppRawDelimiter start=@\%(u8\|[uLU]\)\=R"\z([[:alnum:]_{}[\]#<>%:;.?*\+\-/\^&|~!=,"']\{,16}\)(@ end=/)\z1"/ contains=@Spell

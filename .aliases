@@ -1,34 +1,12 @@
-#disk info
-alias df='df -h'
-#screen alias
-alias home='~/.screenlayout/Home.sh'
-alias lab='~/.screenlayout/Lab.sh'
-alias roaming='~/.screenlayout/NoMonitor.sh'
-
-#factorio
-alias factorio='~/factorio.sh &'
-
+alias python=python3
 alias fucking='sudo'
-#restart tint2
-alias bat='upower -i /org/freedesktop/UPower/devices/battery_BAT0' #display battery information
-# View Apache Log
-alias apachelog='tail /var/log/apache2/error.log'
-
-alias sassdraft='cd ~/draft_mvc; sass --watch sass:css'
 
 # Directorys
 alias rm='rm -i'
 alias rd='~/.scripts/removedir.pl'
 
-# ROS
-alias ros='cd ~/catkin_ws/' # change to the ross directory
-alias rviz='rosrun rviz rviz -d ~/.rviz/turtlebot.rviz'
-
 # Config Editing
-alias te='vim ~/.config/tint2/tint2rc && ~/.scripts/tint2-restart.sh'
-alias autostart='vim ~/.config/openbox/autostart' # edit autobox autostart
 alias xe='vim ~/.Xresources && xrdb ~/.Xresources' #edit xresources and resource the file
-alias ce='vim ~/.conkyrc'
 alias be='vim ~/.bashrc && source ~/.bashrc'
 
 # run synaptic
@@ -36,17 +14,13 @@ alias synaptic='gksudo synaptic && exit'
 
 # Change BG
 alias fbg='feh --bg-scale'
-alias wall='fbg ~/wallpaper.png'
+alias wall='fbg ~/wallpaper'
 
 # GIT
 alias commit='git commit -am'
-alias push='git push origin'
-alias pull='git pull origin'
+alias push='git push'
+alias pull='git pull'
 alias clone='git clone'
-
-# BLUETOOTH & AUDIO
-alias bt='~/.scripts/bluetooth.sh'
-alias pavu='pavucontrol'
 
 # APT-GET
 alias apt-find='apt-cache search '
@@ -59,12 +33,3 @@ alias tp='~/.scripts/touchpad_toggle.sh'
 # TAR
 alias tarz='~/.scripts/tarz'
 alias tar='~/.scripts/tarz'
-
-# ssh
-alias olympus='ssh lanterns@107.180.25.1'
-alias kusanagi='ssh kusanagi@kusanagi'
-alias pi='ssh pi@danielrmadison.com'
-
-# restart pulse audio
-#alias pulsek='pulseaudio -k'
-alias pulsek='killall -9 pulseaudio'

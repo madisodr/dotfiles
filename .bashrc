@@ -152,6 +152,3 @@ export LESS_TERMCAP_us=$'\e[1;32m'
 
 # DISABLE FUCKING XON
 stty -ixon
-
-source ~/catkin_ws/devel/setup.bash
-export ROS_MASTER_URI=http://10.0.4.103:11311

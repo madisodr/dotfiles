@@ -64,7 +64,7 @@ Xft.rgba: rgb
 
 URxvt.letterSpace: 1
 URxvt.scrollBar: off
-URxvt.saveLines: 30000
+URxvt.saveLines: 50000
 URxvt.secondaryScroll: true
 URxvt.scrollTtyOutput: true
 URxvt.url-launcher: /usr/bin/google-chrome
@@ -99,7 +99,7 @@ rofi.color-active: BG, BL, BG, FG, BL
 rofi.color-urgent: BG, RD, BG, FG, MA
 
 rofi.location: 0
-rofi.terminal: urxvt
+! rofi.terminal: urxvt
 
 rofi.bw: 0
 rofi.separator-style: none

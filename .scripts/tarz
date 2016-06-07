@@ -10,9 +10,9 @@ $file = $filefull = $ARGV[1];
 $file =~ s{\.[^.]+$}{}; # removes the file extention. I think...
 
 switch($op) {
-    case 'c'{ print"taring\n"; system("tar -cf $file.tar $file");}
-    case 'z'{ print"gzipping + taring\n"; system("tar -czf $file.tar $file");}
-    case 'x'{ print"extracting\n"; system("tar -xf $filefull");}
+    case 'c'{ print"taring\n"; system("tar -cvf $file.tar $file");}
+    case 'z'{ print"gzipping + taring\n"; system("tar -czvf $file.tar $file");}
+    case 'x'{ print"extracting\n"; system("tar -xvf $filefull");}
     case 'l'{ print"listing archive..\n"; system("tar -tvf $filefull");}
     
     else { &usage; }

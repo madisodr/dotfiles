@@ -17,21 +17,19 @@
     """ github repos {{{
         Bundle 'gmarik/vundle'
         Bundle 'ervandew/supertab'
-        """Bundle 'Valloric/YouCompleteMe'
         Bundle 'bling/vim-airline'
         Bundle 'scrooloose/nerdtree'
-        Bundle 'scrooloose/nerdcommenter'
         Bundle 'tpope/vim-surround'
         Bundle 'majutsushi/tagbar'
         Bundle 'octol/vim-cpp-enhanced-highlight'
         Bundle 'MarcWeber/vim-addon-mw-utils'
         Bundle 'tomtom/tlib_vim'
         Bundle 'garbas/vim-snipmate'
-        Bundle 'othree/html5.vim'
-        Bundle 'chriskempson/base16-vim'
         Bundle 'sukima/xmledit'
         Bundle 'vim-scripts/simple-pairs'
         Bundle 'Townk/vim-autoclose'
+		Bundle 'vim-scripts/TagHighlight'
+		Bundle 'szw/vim-tags'
 """ }}}
 """ User interface {{{
     """ Syntax highlighting {{{
@@ -47,7 +45,7 @@
         """ Highlight characters past 80 {{{
             augroup vimrc_autocmds
                 autocmd BufEnter * highlight OverLength ctermbg=black guibg=#292929
-                autocmd BufEnter * match OverLength /\%160v.*/
+                autocmd BufEnter * match OverLength /\%180v.*/
             augroup END
         """ }}}
     """ }}}
@@ -92,7 +90,7 @@
         set wrap
         set linebreak
         set nolist "list dables linebreak
-        set textwidth=0
+        set textwidth=120
         set wrapmargin=0
     """ Folding {{{
         set foldcolumn=0                            " 1 width folding column
@@ -125,7 +123,7 @@
 """ Text formatting {{{
     set autoindent                                  " preserve indentation
     set backspace=indent,eol,start                  " smart backspace
-    set expandtab                                   " no real tabs
+    set noexpandtab                                 " real tabs plase 
     set shiftround                                  " be clever with tabs
     set shiftwidth=4                                " default 8
     set smartcase                                   " igncase,except w/capitals
