@@ -99,7 +99,7 @@ rofi.color-active: BG, BL, BG, FG, BL
 rofi.color-urgent: BG, RD, BG, FG, MA
 
 rofi.location: 0
-! rofi.terminal: urxvt
+rofi.terminal: urxvt
 
 rofi.bw: 0
 rofi.separator-style: none

@@ -2,7 +2,7 @@ let s:sigil = nr2char(31)
 let snipmate#legacy#sigil = s:sigil
 
 " Prepare snippet to be processed by s:BuildTabStops
-function! snipmate#legacy#process_snippet(snip)
+function! snipmate#legacy#process_snippet(snip) abort
 	let snippet = a:snip
 	let esc_bslash = '\%(\\\@<!\%(\\\\\)*\)\@<='
 
@@ -25,7 +25,8 @@ function! snipmate#legacy#process_snippet(snip)
 		let isexp = 0
 		for i in snip
 			if isexp
-				call add(new, substitute(eval(i), "\n\\%$", '', ''))
+				call add(new, substitute(snipmate#util#eval(i),
+                                            \ "\n\\%$", '', ''))
 			else
 				call add(new, i)
 			endif
@@ -60,7 +61,7 @@ function! snipmate#legacy#process_snippet(snip)
 	endw
 
 	if &et " Expand tabs to spaces if 'expandtab' is set.
-		return substitute(snippet, '\t', repeat(' ', (&sts > 0) ? &sts : &sw), 'g')
+		return substitute(snippet, '\t', repeat(' ', snipmate#util#tabwidth()), 'g')
 	endif
 	return snippet
 endfunction
@@ -76,7 +77,7 @@ endfunction
 "     the matches of "$#", to be replaced with the placeholder. This list is
 "     composed the same way as the parent; the first item is the line number,
 "     and the second is the column.
-function! snipmate#legacy#build_stops(snip, lnum, col, indent)
+function! snipmate#legacy#build_stops(snip, lnum, col, indent) abort
 	let stops = {}
 	let i = 0
 	let withoutVars = substitute(a:snip, s:sigil . '\d\+', '', 'g')
@@ -86,9 +87,9 @@ function! snipmate#legacy#build_stops(snip, lnum, col, indent)
 
 		let stops[i] = {}
 		let stops[i].line = a:lnum + s:count(beforeTabStop, "\n")
-		let stops[i].col = a:indent + len(matchstr(withoutOthers, '.*\(\n\|^\)\zs.*\ze'.s:sigil .'{'.i.'\D'))
-                let stops[i].placeholder = 0
-                let stops[i].mirrors = []
+		let stops[i].col = a:indent + len(matchstr(withoutOthers, '[^\n]\{-}\ze'.s:sigil .'{'.i.'\D'))
+		let stops[i].placeholder = 0
+		let stops[i].mirrors = []
 		if stops[i].line == a:lnum
 			let stops[i].col += a:col
 		endif
@@ -118,7 +119,7 @@ function! snipmate#legacy#build_stops(snip, lnum, col, indent)
 endfunction
 
 " Counts occurences of haystack in needle
-function! s:count(haystack, needle)
+function! s:count(haystack, needle) abort
 	let counter = 0
 	let index = stridx(a:haystack, a:needle)
 	while index != -1

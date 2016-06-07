@@ -20,6 +20,7 @@
         """Bundle 'Valloric/YouCompleteMe'
         Bundle 'bling/vim-airline'
         Bundle 'scrooloose/nerdtree'
+        Bundle 'scrooloose/nerdcommenter'
         Bundle 'tpope/vim-surround'
         Bundle 'majutsushi/tagbar'
         Bundle 'octol/vim-cpp-enhanced-highlight'
@@ -30,7 +31,7 @@
         Bundle 'chriskempson/base16-vim'
         Bundle 'sukima/xmledit'
         Bundle 'vim-scripts/simple-pairs'
-        Bundle 'autoclose/autoclose'
+        Bundle 'Townk/vim-autoclose'
 """ }}}
 """ User interface {{{
     """ Syntax highlighting {{{
