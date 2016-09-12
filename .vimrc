@@ -30,6 +30,7 @@
         Bundle 'Townk/vim-autoclose'
         Bundle 'vim-scripts/TagHighlight'
         Bundle 'szw/vim-tags'
+        Bundle 'bronson/vim-trailing-whitespace'
 """ }}}
 """ User interface {{{
     """ Syntax highlighting {{{
