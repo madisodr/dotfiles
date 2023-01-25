@@ -20,11 +20,14 @@ Plug 'Raimondi/delimitMate'
 " switch between source and header files
 Plug 'vim-scripts/a.vim'
 
+" delete buffers
+Plug 'kazhala/close-buffers.nvim'
+
 " Auto insert/completion
 " Plug 'ervandew/supertab'
 
 " class outline viewer
-Plug 'majutsushi/tagbar'
+" Plug 'majutsushi/tagbar'
 
 " Syntax Highlighter
 "Plug 'vim-scripts/TagHighlight'
@@ -58,12 +61,16 @@ Plug 'neomake/neomake'
 " Plug 'rafi/awesome-vim-colorschemes'
 Plug 'wuelnerdotexe/vim-enfocado'
 
+
+Plug 'preservim/tagbar'
+
 " GOlang
 Plug 'fatih/vim-go'
+
 call plug#end()
 
 let g:snipMate = { 'snippet_version' : 1 }
-
+let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
 " User Interface {{{
     filetype plugin on
     filetype plugin indent on           "enable ft+plugin detect
@@ -214,8 +221,7 @@ let g:coc_global_extensions = [
     \ 'coc-python',
 	\ 'coc-diagnostic',
     \ 'coc-go',
-    \ 'coc-stylelint',
-    \ 'coc-spell-checker'
+    \ 'coc-stylelint'
     \]
 
 " " May need for vim (not neovim) since coc.nvim calculate byte offset by count
@@ -378,3 +384,41 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+nnoremap <silent> <F9> :set spell!<cr>
+inoremap <silent> <F9> <C-O>:set spell!<cr>
+
+
+" https://vi.stackexchange.com/questions/2129/fastest-way-to-switch-to-a-buffer-in-vim
+" pressing \b will list the available buffers and prepare :b for you
+nnoremap <C-e> :set nomore <Bar> :ls <Bar> :set more <CR>:b<Space>
+
+" go lang tagbar settings
+let g:tagbar_type_go = {
+	\ 'ctagstype' : 'go',
+	\ 'kinds'     : [
+		\ 'p:package',
+		\ 'i:imports:1',
+		\ 'c:constants',
+		\ 'v:variables',
+		\ 't:types',
+		\ 'n:interfaces',
+		\ 'w:fields',
+		\ 'e:embedded',
+		\ 'm:methods',
+		\ 'r:constructor',
+		\ 'f:functions'
+	\ ],
+	\ 'sro' : '.',
+	\ 'kind2scope' : {
+		\ 't' : 'ctype',
+		\ 'n' : 'ntype'
+	\ },
+	\ 'scope2kind' : {
+		\ 'ctype' : 't',
+		\ 'ntype' : 'n'
+	\ },
+	\ 'ctagsbin'  : 'gotags',
+	\ 'ctagsargs' : '-sort -silent'
+\ }
+

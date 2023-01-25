@@ -14,7 +14,7 @@ switch($op) {
     case 'z'{ print"gzipping + taring\n"; system("tar -czvf $file.tar $file");}
     case 'x'{ print"extracting\n"; system("tar -xvf $filefull");}
     case 'l'{ print"listing archive..\n"; system("tar -tvf $filefull");}
-    
+
     else { &usage; }
 }
 
