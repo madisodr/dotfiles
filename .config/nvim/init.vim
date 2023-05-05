@@ -17,6 +17,7 @@ Plug 'neoclide/coc.nvim', {'branch': 'release'} " Intelisense
 " more autoclose Not sure which is better???
 "Plug 'townk/vim-autoclose'
 Plug 'Raimondi/delimitMate'
+
 " switch between source and header files
 Plug 'vim-scripts/a.vim'
 
@@ -24,7 +25,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'kazhala/close-buffers.nvim'
 
 " Auto insert/completion
-" Plug 'ervandew/supertab'
+Plug 'ervandew/supertab'
 
 " class outline viewer
 " Plug 'majutsushi/tagbar'
@@ -38,7 +39,7 @@ Plug 'bling/vim-airline'
 Plug 'vim-airline/vim-airline-themes'
 
 " Better Cpp Highlighting
-Plug 'octol/vim-cpp-enhanced-highlight'
+"Plug 'octol/vim-cpp-enhanced-highlight'
 
 " Git Wrapper
 Plug 'tpope/vim-fugitive'
@@ -87,6 +88,8 @@ let g:Tlist_Ctags_Cmd='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
     set showcmd
     set visualbell                  "visual instead of beep
     set noswapfile
+    let delimitMate_expand_cr = 1
+    let delimitMate_expand_space = 1
     " Airline{{{
         let g:airline_powerline_fonts = 1
         let g:airline#extensions#tabline#enabled = 2
